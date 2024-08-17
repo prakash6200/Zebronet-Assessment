@@ -1,0 +1,616 @@
+{
+	"info": {
+		"_postman_id": "42cf5dd0-be97-4767-804e-ecbeffdee0c0",
+		"name": "API Collections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23378522"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "fullName",
+									"value": "level2",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "leve@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Prakash@123",
+									"type": "text"
+								},
+								{
+									"key": "mobile",
+									"value": "8767827874",
+									"type": "text"
+								},
+								{
+									"key": "cnfPassword",
+									"value": "Prakash@123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/user/auth/signup",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponse = pm.response.json();",
+									"",
+									"// Extract the token from the response",
+									"var jwtToken = jsonResponse.data.token;",
+									"",
+									"// Set the token as an environment variable",
+									"pm.environment.set(\"jwtToken\", jwtToken);pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Extract the token from the response and set it as an environment variable",
+									"var jwtToken = pm.response.json().data.token;",
+									"pm.environment.set(\"jwtToken\", jwtToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "mobile",
+									"value": "8767827874",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "Prakash@123",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "leve2@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/user/auth/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Otp Email and mobile for Verify",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "mobile",
+									"value": "6200134797",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "prakashkr2609@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/user/auth/send/otp",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"send",
+								"otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify email and mobile OTP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "mobile",
+									"value": "6200134797",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "prakashkr2609@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "otp",
+									"value": "125",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/user/auth/verify/otp",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"verify",
+								"otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Login password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "oldPassword",
+									"value": "Prakash@123",
+									"type": "text"
+								},
+								{
+									"key": "newPassword",
+									"value": "Prakash122@",
+									"type": "text"
+								},
+								{
+									"key": "cnfPassword",
+									"value": "Prakash122@",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/user/auth/change/password",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"change",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify forgot password otp",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI2MjI4YmRmZjljYTFiMGFjZjIwYjkzMjYiLCJuYW1lIjoiRHhiNTk5OSAiLCJ1c2VySWQiOiJZV3FaWSIsImVtYWlsIjoiZGVzdXJpMTk4NEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRwR09YMENnN0czbEJFcFNLSG1LUEJlWmNuOU5OU2lSSHNwLkNUSXVMRU5URExONTREcFBYTyIsImlzU2V0VHhQYXNzd29yZCI6ZmFsc2UsInR3b0ZhY3RvckF1dGhlbnRpY2F0aW9uIjp0cnVlLCJpc0VtYWlsVmVyaWZpZWQiOmZhbHNlLCJpc1N1YnNjcmliZWQiOmZhbHNlLCJpc0NyZWF0ZUNpcmNsZSI6dHJ1ZSwiZnJlZVRyaWFsIjpmYWxzZSwiZnJlZVRyaWFsRW5kIjowLCJpc0RlbGV0ZWQiOmZhbHNlLCJhdXRoZW50aWNhdG9yVmVyaWZpZWQiOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDIyLTAzLTA5VDE0OjQ3OjI3Ljg4MloiLCJ1cGRhdGVkQXQiOiIyMDIyLTAzLTEwVDA1OjEyOjU3LjkzNFoiLCJfX3YiOjB9.NZFcj1nNMBtnjrJHsvePm5nxBthTKVVl8IuCgySbDU0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "mobile",
+									"value": "6200134797",
+									"type": "text"
+								},
+								{
+									"key": "otp",
+									"value": "124089",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "prakash@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/user/auth/forgot/password/verify/otp",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"forgot",
+								"password",
+								"verify",
+								"otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "newPassword",
+									"value": "1234561245",
+									"type": "text"
+								},
+								{
+									"key": "cnfPassword",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/user/auth/reset/password",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"reset",
+								"password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Content",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{jwtToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"courseName\": \"Heeloe\",\n    \"courseDescription\": \"dfasdfasdfas\",\n    \"lessons\": [\"a\", \"b\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user/content/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"content",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{jwtToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"contentId\": 2,\n    \"courseName\": \"Hello\",\n    \"courseDescription\": \"updated language\",\n    \"lessons\": [\"a\", \"b\", \"c\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user/content/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"content",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{jwtToken}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "contentId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/user/content/delete",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"content",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "content List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{jwtToken}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "contentId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/user/content/list?page=1&sizePerPage=4&search=pr",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"content",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "sizePerPage",
+									"value": "4"
+								},
+								{
+									"key": "search",
+									"value": "pr"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Caching Search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{jwtToken}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "contentId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/user/content/caching/search?page=1&sizePerPage=4&search=pr",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"content",
+								"caching",
+								"search"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "sizePerPage",
+									"value": "4"
+								},
+								{
+									"key": "search",
+									"value": "pr"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "jwtToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "clientId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
